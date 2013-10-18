@@ -2,23 +2,22 @@ Javascript-Spell-Corrector
 ==========================
 
 To use:
-SpellCorrector spellCheck = new SpellCorrector(inputID);
+
+SpellCorrector.suggestSimilarWord(inputID, outputID);
 
 -----------------------------------------------------------
 JQUERY
 ```
 <input type="text" id="input1" />
-<h3 id="suggestion"></h3>
+<h3 id="output1"></h3>
 ```
 ```
-SpellCorrector spellCheck = new SpellCorrector("input1");
 
 var suggestWord = function() {
-    var suggestion = spellCheck.suggestSimilarWord();
-    $("#suggestion").html(suggestion);
+    SpellCorrector.suggestSimilarWord("input1","output1");
 }
 
-$("input1").on("change", suggestWord());
+$("#input1").on("change", suggestWord());
 ```
 -----------------------------------------------------------
 AngularJS
@@ -27,9 +26,8 @@ AngularJS
 <h3> {{suggestion}} </h3>
 ```
 ```
-SpellCorrector spellCheck = new SpellCorrector("input1");
 
 $scope.suggestWord = function() {
-    $scope.suggestion = spellCheck.suggestSimilarWord();
+    $scope.suggestion = spellCheck.suggestSimilarWord("input1");
 }
 ```
