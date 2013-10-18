@@ -360,13 +360,18 @@ var SpellCorrector = (function() {
 	 */
 	return {
 		suggestSimilarWord : function(inputID, outputID) {
-			if (typeof(inputID) != "string" || typeof(outputID) != "string")  {
+			if (typeof(inputID) != "string")  {
 				console.log("suggestSimilarWord() takes strings as parameters.");
 				return;
 			}
-			var inputElement = document.getElementById(inputID);
-			var outputElement = document.getElementById(outputID);
-			if (!inputElement || !outputElement) {
+			var inputElement = document.getElementById(inputID),
+				outputElement;
+			
+			if (typeof(outputID) == "string") {
+				outputElement = document.getElementById(outputID);
+			}
+
+			if (!inputElement || (outputID && !outputElement)) {
 				console.log("Incorrect element id");
 				return;
 			}
@@ -384,11 +389,11 @@ var SpellCorrector = (function() {
 			}
 
 			if (suggestion == null) {
-				outputElement.value = "";
+				if (outputElement) outputElement.innerHTML = "";
 				return "";
 			}
 			else {
-				outputElement.innerHTML = suggestion.getSubString();
+				if (outputElement) outputElement.innerHTML = suggestion.getSubString();
 				return suggestion.getSubString();
 			}
 		}
